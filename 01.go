@@ -8,7 +8,6 @@ func main() {
 		var turn, step = 0, 1
 		var dir byte
 		if _, err := fmt.Scanf("%c%d", &dir, &turn); err != nil { break }
-		fmt.Println(dir, turn)
 		if dir == 'L' { step = 99 }
 		for range turn {
 			n = (n + step) % 100
