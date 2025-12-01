@@ -1,9 +1,8 @@
 void main() {
     int n = 50, stops = 0, clicks = 0;
-    String line = IO.readln();
+    var line = IO.readln();
     while (line != null) {
-        var turn = Integer.parseInt(line.substring(1));
-        for (int i = 0; i < turn; i++) {
+        for (int i = 0; i < Integer.parseInt(line.substring(1)); i++) {
            n = (n + (line.charAt(0) == 'R' ? 1 : 99)) % 100;
            if (n == 0) clicks++;
         }
