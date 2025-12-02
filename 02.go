@@ -11,9 +11,7 @@ func main() {
 	var ids, ids2 int64
 	for _, rang := range ranges {
 		var se = strings.Split(rang, "-")
-		if len(se) != 2 {
-			continue
-		}
+		if len(se) != 2 { continue }
 		var start, end int64
 		start, _ = strconv.ParseInt(se[0], 10, 64)
 		end, _ = strconv.ParseInt(se[1], 10, 64)
@@ -23,11 +21,8 @@ func main() {
 				ids += n
 			}
 			for i, j := 1, 0; i <= len(s)/2; i++ {
-				if len(s)%i != 0 {
-					continue
-				}
-				for j = 0; j < len(s) && s[j:j+i] == s[:i]; j += i {
-				}
+				if len(s)%i != 0 { continue }
+				for j = 0; j < len(s) && s[j:j+i] == s[:i]; j += i { }
 				if j == len(s) {
 					ids2 += n
 					break
