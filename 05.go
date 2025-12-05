@@ -17,12 +17,12 @@ func main() {
 		var end, _ = strconv.ParseInt(parts[1], 10, 64)
 		ranges = append(ranges, []int64{ start, end })
 	}
-	var n, total = 0, int64(0)
+	var fresh, total = 0, int64(0)
 	for scanner.Scan() {
 		var id, _ = strconv.ParseInt(scanner.Text(), 10, 64)
 		for _, r := range ranges {
 			if r[0] <= id && id <= r[1] {
-				n++
+				fresh++
 				break
 			}
 		}
@@ -42,5 +42,5 @@ func main() {
 	for _, r := range merged {
 		total += r[1] - r[0] + 1
 	}
-	fmt.Println(n, total)
+	fmt.Println(fresh, total)
 }
