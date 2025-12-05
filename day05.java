@@ -1,4 +1,7 @@
 import static java.lang.IO.*;
+import static java.lang.Long.parseLong;
+import static java.util.Comparator.comparingLong;
+
 import java.util.ArrayList;
 
 void main() {
@@ -7,17 +10,17 @@ void main() {
     var line = readln();
     while (line != null) {
         if (line.isBlank()) break;
-        ranges.add(new Range(Long.parseLong(line.substring(0, line.indexOf('-'))), Long.parseLong(line.substring(line.indexOf('-') + 1))));
+        ranges.add(new Range(parseLong(line.substring(0, line.indexOf('-'))), parseLong(line.substring(line.indexOf('-') + 1))));
         line = readln();
     }
-    long n = 0L, total = 0L;
+    long n = 0L;
     line = readln();
     while (line != null) {
-        var id = Long.parseLong(line);
+        var id = parseLong(line);
         if (ranges.stream().anyMatch(r -> r.first <= id && id <= r.last)) n++;
         line = readln();
     }
-    ranges.sort((a, b) -> a.first == b.first ? 0 : (a.first < b.first ? -1 : 1));
+    ranges.sort(comparingLong(a -> a.first));
     var merged = new ArrayList<Range>();
     for (var r : ranges) {
         if (!merged.isEmpty() && r.first <= merged.getLast().last) {
