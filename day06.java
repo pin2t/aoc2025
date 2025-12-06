@@ -1,7 +1,9 @@
 import static java.lang.IO.println;
+import static java.lang.Long.parseLong;
+import static java.lang.System.in;
 
 void main() throws IOException {
-    var lines = new BufferedReader(new InputStreamReader(System.in)).readAllLines();
+    var lines = new BufferedReader(new InputStreamReader(in)).readAllLines();
     var ops = lines.getLast();
     lines = lines.subList(0, lines.size() - 1);
     var re = Pattern.compile("\\d+");
@@ -20,7 +22,7 @@ void main() throws IOException {
         for (var l : lines) { s.append(l.charAt(i)); }
         var ss = s.toString().trim();
         if (!ss.isBlank()) {
-            nums.add(Long.parseLong(ss));
+            nums.add(parseLong(ss));
         }
         switch (i < ops.length() ? ops.charAt(i) : ' ') {
         case '+':
