@@ -13,13 +13,14 @@ func main() {
 		lines = append(lines, scanner.Text())
 	}
 	var ops = lines[len(lines) - 1]
+	lines = lines[:len(lines) - 1]
 	var res int64
 	for j := 0; j < len(ops); j ++ {
 		var op = ops[j]
 		if op == '+' || op == '*' {
 			var numbers = make([]int64, 0)
-			for i := 0; i < len(lines) - 1; i ++ {
-				numbers = append(numbers, toint(reNum.FindString(lines[i][j:])))
+			for _, l := range lines {
+				numbers = append(numbers, toint(reNum.FindString(l[j:])))
 			}
 			res += eval(op, numbers)
 		}
@@ -32,9 +33,9 @@ func main() {
 			op = ops[j]
 		}
 		var s string
-		for i := 0; i < len(lines) - 1; i++ {
-			if lines[i][j] != ' ' {
-				s += string(lines[i][j])
+		for _, l := range lines {
+			if l[j] != ' ' {
+				s += string(l[j])
 			}
 		}
 		if len(s) > 0 {
