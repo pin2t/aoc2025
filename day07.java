@@ -13,8 +13,8 @@ void main() {
     while (line != null) {
         for (int i = 0; i < line.length(); i++) {
             if (line.charAt(i) == '^' && tl[i] > 0L) {
-                tl[i - 1] = tl[i - 1] + tl[i];
-                tl[i + 1] = tl[i + 1] + tl[i];
+                tl[i - 1] += tl[i];
+                tl[i + 1] += tl[i];
                 tl[i] = 0L;
                 splits++;
             }
