@@ -2,8 +2,6 @@ package main
 import "fmt"
 import "sort"
 
-type pos struct { x, y, z int }
-
 func main() {
 	var boxes = make([]pos, 0)
 	for {
@@ -69,6 +67,8 @@ func main() {
 		}
 	}
 }
+
+type pos struct { x, y, z int }
 
 func dist(a, b pos) int64 {
 	return int64((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y) + (b.z - a.z) * (b.z - a.z))
