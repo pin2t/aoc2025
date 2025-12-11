@@ -42,15 +42,15 @@ func main() {
 			lights []bool
 			presses int
 		}
-		var inilights = make([]bool, len(m.lights))
-		for i, _ := range inilights {
-			inilights[i] = false
+		var init = make([]bool, len(m.lights))
+		for i, _ := range init {
+			init[i] = false
 		}
-		var queue = make([]state, 0)
-		queue = append(queue, state{ inilights, 0 })
-		for len(queue) > 0 {
-			var st = queue[0]
-			queue = queue[1:]
+		var q = make([]state, 0)
+		q = append(q, state{ init, 0 })
+		for len(q) > 0 {
+			var st = q[0]
+			q = q[1:]
 			if slices.Equal(m.lights, st.lights) {
 				presses[0] += st.presses
 				break
@@ -61,7 +61,7 @@ func main() {
 				for _, bl := range b {
 					lights[bl] = !lights[bl]
 				}
-				queue = append(queue, state{ lights, st.presses + 1 })
+				q = append(q, state{ lights, st.presses + 1 })
 			}
 		}
 	}

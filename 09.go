@@ -3,6 +3,8 @@ import "fmt"
 import "slices"
 
 type pos struct { x, y int }
+type dir struct { dx, dy int }
+var up, right, down, left = dir{ 0, -1 }, dir{ 1, 0 }, dir{ 0, 1 }, dir{ -1, 0 }
 
 func main() {
 	var reds = make([]pos, 0)
@@ -65,8 +67,8 @@ func main() {
 		q = q[1:]
 		if outside[p] { continue }
 		outside[p] = true
-		for _, d := range []pos{ { 0, -1 }, { 1, 0 }, { 0, 1 }, { -1, 0} } {
-			var nx = pos{ p.x + d.x, p.y + d.y }
+		for _, d := range []dir{ up, right, down, left } {
+			var nx = pos{ p.x + d.dx, p.y + d.dy }
 			if 0 <= nx.x && nx.x < maxx + 2 && 0 <= nx.y && nx.y < maxy + 2 && !colored[nx] {
 				q = append(q, nx)
 			}
