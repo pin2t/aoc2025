@@ -85,7 +85,7 @@ func main() {
 		}
 		for i, j := range m.joltage {
 			var equation = ctx.Int(0, ctx.IntSort())
-			for k, b := range m.buttons {
+			for _, b := range m.buttons {
 				var found = false
 				for _, out := range b {
 					if out == i {
