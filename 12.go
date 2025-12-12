@@ -12,9 +12,9 @@ func toint(s string) int {
 }
 
 func main() {
-	var tiles = []int{ 5, 7, 7, 7, 6, 7 }
+	var tiles = []int{ 5, 7, 7, 7, 6, 7 }  // number of tiles ('#') in each input shape
 	var reNum = regexp.MustCompile("\\d+")
-	scanner := bufio.NewScanner(os.Stdin)
+	var scanner = bufio.NewScanner(os.Stdin)
 	var res = 0
 	for scanner.Scan() {
 		var line = scanner.Text()
