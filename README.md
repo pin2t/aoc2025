@@ -22,4 +22,4 @@ and run
 ```shell
 CGO_CFLAGS="-I/Users/pin/aoc2025/z3/include" go run 10.go < inputs/10.txt
 ```
-use yours full poath to z3 of course 
+use yours full path to z3 of course 
