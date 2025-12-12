@@ -71,8 +71,8 @@ func main() {
 		}
 	}
 	var config = z3.NewConfig()
+	defer config.Close()
 	var ctx = z3.NewContext(config)
-	config.Close()
 	defer ctx.Close()
 	for _, m := range machines {
 		var s = ctx.NewSolver()
@@ -81,11 +81,12 @@ func main() {
 		var vars = make([]*z3.AST, len(m.buttons))
 		for i, _ := range m.buttons {
 			vars[i] = ctx.Const(ctx.Symbol(fmt.Sprintf("n%d", i)), ctx.IntSort())
-			s.Assert(vars[i].Gt(zero))
+			var cond = vars[i].Gt(zero).Or(vars[i].Eq(zero))
+			s.Assert(cond)
 		}
 		for i, j := range m.joltage {
-			var equation = ctx.Int(0, ctx.IntSort())
-			for _, b := range m.buttons {
+			var equation *z3.AST = nil
+			for k, b := range m.buttons {
 				var found = false
 				for _, out := range b {
 					if out == i {
@@ -94,10 +95,14 @@ func main() {
 					}
 				}
 				if found {
-					equation.Add(vars[j])
+					if equation == nil {
+						equation = vars[k]
+					} else {
+						equation = equation.Add(vars[k])
+					}
 				}
 			}
-			equation.Eq(ctx.Int(j, ctx.IntSort()))
+			equation = equation.Eq(ctx.Int(j, ctx.IntSort()))
 			s.Assert(equation)
 		}
 		if v := s.Check(); v != z3.True {
