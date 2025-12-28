@@ -46,12 +46,9 @@ void main() throws IOException {
         try (var ctx = new Context()) {
             var opt = ctx.mkOptimize();
             var vars = new ArrayList<IntExpr>();
-            var exprs = new ArrayList<BoolExpr>();
             for (int i = 0; i < buttons.size(); i++) {
                 var ni = ctx.mkIntConst("n" + i);
-                var be = ctx.mkGt(ni, ctx.mkInt(0));
-                opt.Assert(be);
-                exprs.add(be);
+                opt.Assert(ctx.mkGe(ni, ctx.mkInt(0)));
                 vars.add(ni);
             }
             for (int i = 0; i < jolts.size(); i++) {
@@ -69,7 +66,6 @@ void main() throws IOException {
                     be = ctx.mkEq(ctx.mkAdd(ints.toArray(new IntExpr[0])), ctx.mkInt(jolts.get(i)));
                 }
                 opt.Assert(be);
-                exprs.add(be);
             }
             Optimize.Handle<IntSort> res = opt.MkMinimize(ctx.mkAdd(vars.toArray(new IntExpr[0])));
             if (opt.Check() == Status.SATISFIABLE) {

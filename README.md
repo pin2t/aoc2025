@@ -13,8 +13,10 @@ go run 01.go < inputs/01.txt
 java day01.java < inputs/01.txt
 ```
 Java 25+ is required
+       
+### Day 10 specifics
 
-day 10 solution requires z3 library. Unpack suitable zip archive from https://github.com/Z3Prover/z3/releases to z3 directory, then copy bin directory to go-z3 module
+Day 10 solution requires z3 library. Unpack suitable zip archive from https://github.com/Z3Prover/z3/releases to z3 directory, then copy bin directory to go-z3 module
 ```shell
 cp z3/bin/* /Users/pin/go/pkg/mod/github.com/mitchellh/go-z3@v0.0.0-20191228203228-4cbedeba863f/
 ```
@@ -22,4 +24,12 @@ and run
 ```shell
 CGO_CFLAGS="-I/Users/pin/aoc2025/z3/include" go run 10.go < inputs/10.txt
 ```
-use your full path to z3 of course 
+use your full path to z3 of course
+
+Java day 10 
+
+```shell
+cd z3/bin
+java -cp com.microsoft.z3.jar: ../../day10.java < ../../inputs/10.txt
+
+```
