@@ -8,8 +8,7 @@ Map<String, Long> cache = new HashMap<>();
 long paths(String from, String to) {
     if (from.equals(to)) { return 1; }
     if (cache.containsKey(from + to)) { return cache.get(from + to); }
-    var result = conns.getOrDefault(from, emptyList())
-        .stream().mapToLong(it -> paths(it, to)).sum();
+    var result = conns.getOrDefault(from, emptyList()).stream().mapToLong(it -> paths(it, to)).sum();
     cache.put(from + to, result);
     return result;
 }
